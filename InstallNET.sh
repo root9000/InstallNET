@@ -808,7 +808,7 @@ vnc
 skipx
 timezone --isUtc Asia/Hong_Kong
 #ONDHCP network --bootproto=dhcp --onboot=on
-#NODHCP network --bootproto=static --ip=$IPv4 --netmask=$MASK --gateway=$GATE --nameserver=8.8.8.8 --onboot=on
+#NODHCP network --bootproto=static --ip=$IPv4 --netmask=$MASK --gateway=$GATE --nameserver=1.0.0.1 --onboot=on
 bootloader --location=mbr --append="rhgb quiet crashkernel=auto"
 
 %packages
