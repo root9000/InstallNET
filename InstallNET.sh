@@ -796,8 +796,6 @@ cat >/tmp/boot/ks.cfg<<EOF
 firewall --enabled --ssh
 install
 url --url="http://$DISTMirror/$DIST/os/$VER/"
-rootpw --iscrypted $myPASSWORD
-auth --useshadow --passalgo=sha512
 firstboot --disable
 lang en_US
 keyboard us
@@ -812,9 +810,6 @@ timezone --isUtc Asia/Hong_Kong
 #ONDHCP network --bootproto=dhcp --onboot=on
 #NODHCP network --bootproto=static --ip=$IPv4 --netmask=$MASK --gateway=$GATE --nameserver=8.8.8.8 --onboot=on
 bootloader --location=mbr --append="rhgb quiet crashkernel=auto"
-zerombr
-clearpart --all --initlabel 
-autopart
 
 %packages
 @base
