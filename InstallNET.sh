@@ -659,7 +659,7 @@ d-i netcfg/dhcp_options select Configure network manually
 d-i netcfg/get_ipaddress string $IPv4
 d-i netcfg/get_netmask string $MASK
 d-i netcfg/get_gateway string $GATE
-d-i netcfg/get_nameservers string 8.8.8.8
+d-i netcfg/get_nameservers string 1.0.0.1
 d-i netcfg/no_default_route boolean true
 d-i netcfg/confirm_static boolean true
 
@@ -672,7 +672,7 @@ d-i mirror/http/proxy string
 
 d-i passwd/root-login boolean ture
 d-i passwd/make-user boolean false
-d-i passwd/root-password-crypted password $myPASSWORD
+
 d-i user-setup/allow-password-weak boolean true
 d-i user-setup/encrypt-home boolean false
 
@@ -693,11 +693,10 @@ debconf-set grub-installer/bootdev string "\$(list-devices disk |head -n1)"; \
 umount /media || true; \
 
 d-i partman/mount_style select uuid
-d-i partman-auto/init_automatically_partition select Guided - use entire disk
-d-i partman-auto/method string regular
+
 d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
-d-i partman-auto/choose_recipe select atomic
+
 d-i partman-partitioning/confirm_write_new_label boolean true
 d-i partman/choose_partition select finish
 d-i partman-lvm/confirm boolean true
