@@ -692,18 +692,6 @@ cp -f '/net.bat' './net.bat'; \
 debconf-set grub-installer/bootdev string "\$(list-devices disk |head -n1)"; \
 umount /media || true; \
 
-d-i partman/mount_style select uuid
-
-d-i partman-lvm/device_remove_lvm boolean true
-d-i partman-md/device_remove_md boolean true
-
-d-i partman-partitioning/confirm_write_new_label boolean true
-d-i partman/choose_partition select finish
-d-i partman-lvm/confirm boolean true
-d-i partman-lvm/confirm_nooverwrite boolean true
-d-i partman/confirm boolean true
-d-i partman/confirm_nooverwrite boolean true
-
 d-i debian-installer/allow_unauthenticated boolean true
 
 tasksel tasksel/first multiselect minimal
