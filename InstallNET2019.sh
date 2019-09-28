@@ -326,7 +326,7 @@ if [[ "$SpikCheckDIST" == '0' ]]; then
 fi
 
 [[ "$ddMode" == '1' ]] && {
-  export SSL_SUPPORT='https://moeclub.org/get/wget_udeb_amd64';
+  export SSL_SUPPORT='https://raw.githubusercontent.com/root9000/InstallNET/master/wget_udeb_amd64.tar.gz';
   if [[ -n "$tmpURL" ]]; then
     DDURL="$tmpURL"
     echo "$DDURL" |grep -q '^http://\|^ftp://\|^https://';
@@ -648,7 +648,7 @@ d-i netcfg/dhcp_options select Configure network manually
 d-i netcfg/get_ipaddress string $IPv4
 d-i netcfg/get_netmask string $MASK
 d-i netcfg/get_gateway string $GATE
-d-i netcfg/get_nameservers string 8.8.8.8
+d-i netcfg/get_nameservers string 1.0.0.1
 d-i netcfg/no_default_route boolean true
 d-i netcfg/confirm_static boolean true
 
@@ -662,7 +662,7 @@ d-i apt-setup/services-select multiselect
 
 d-i passwd/root-login boolean ture
 d-i passwd/make-user boolean false
-d-i passwd/root-password-crypted password $myPASSWORD
+#d-i passwd/root-password-crypted password $myPASSWORD
 d-i user-setup/allow-password-weak boolean true
 d-i user-setup/encrypt-home boolean false
 
@@ -671,7 +671,7 @@ d-i time/zone string US/Eastern
 d-i clock-setup/ntp boolean true
 
 d-i preseed/early_command string anna-install libfuse2-udeb fuse-udeb ntfs-3g-udeb fuse-modules-${vKernel_udeb}-amd64-di
-d-i partman/early_command string [[ -n "\$(blkid -t TYPE='vfat' -o device)" ]] && umount "\$(blkid -t TYPE='vfat' -o device)"; \
+#d-i partman/early_command string [[ -n "\$(blkid -t TYPE='vfat' -o device)" ]] && umount "\$(blkid -t TYPE='vfat' -o device)"; \
 debconf-set partman-auto/disk "\$(list-devices disk |head -n1)"; \
 wget -qO- '$DDURL' |gunzip -dc |/bin/dd of=\$(list-devices disk |head -n1); \
 mount.ntfs-3g \$(list-devices partition |head -n1) /mnt; \
@@ -682,19 +682,19 @@ cp -f '/net.bat' './net.bat'; \
 debconf-set grub-installer/bootdev string "\$(list-devices disk |head -n1)"; \
 umount /media || true; \
 
-d-i partman/mount_style select uuid
-d-i partman-auto/init_automatically_partition select Guided - use entire disk
-d-i partman-auto/choose_recipe select All files in one partition (recommended for new users)
-d-i partman-auto/method string regular
-d-i partman-lvm/device_remove_lvm boolean true
-d-i partman-md/device_remove_md boolean true
-d-i partman-auto/choose_recipe select atomic
-d-i partman-partitioning/confirm_write_new_label boolean true
-d-i partman/choose_partition select finish
-d-i partman-lvm/confirm boolean true
-d-i partman-lvm/confirm_nooverwrite boolean true
-d-i partman/confirm boolean true
-d-i partman/confirm_nooverwrite boolean true
+#d-i partman/mount_style select uuid
+#d-i partman-auto/init_automatically_partition select Guided - use entire disk
+#d-i partman-auto/choose_recipe select All files in one partition (recommended for new users)
+#d-i partman-auto/method string regular
+#d-i partman-lvm/device_remove_lvm boolean true
+#d-i partman-md/device_remove_md boolean true
+#d-i partman-auto/choose_recipe select atomic
+#d-i partman-partitioning/confirm_write_new_label boolean true
+#d-i partman/choose_partition select finish
+#d-i partman-lvm/confirm boolean true
+#d-i partman-lvm/confirm_nooverwrite boolean true
+#d-i partman/confirm boolean true
+#d-i partman/confirm_nooverwrite boolean true
 
 d-i debian-installer/allow_unauthenticated boolean true
 
@@ -802,7 +802,7 @@ vnc
 skipx
 timezone --isUtc Asia/Hong_Kong
 #ONDHCP network --bootproto=dhcp --onboot=on
-#NODHCP network --bootproto=static --ip=$IPv4 --netmask=$MASK --gateway=$GATE --nameserver=8.8.8.8 --onboot=on
+#NODHCP network --bootproto=static --ip=$IPv4 --netmask=$MASK --gateway=$GATE --nameserver=1.0.0.1 --onboot=on
 bootloader --location=mbr --append="rhgb quiet crashkernel=auto"
 zerombr
 clearpart --all --initlabel 
