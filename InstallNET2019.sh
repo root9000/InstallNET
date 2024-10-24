@@ -655,8 +655,8 @@ d-i time/zone string US/Eastern
 d-i clock-setup/ntp boolean false
 
 d-i preseed/early_command string anna-install libfuse2-udeb fuse-udeb ntfs-3g-udeb libcrypto1.1-udeb libpcre2-8-0-udeb libssl1.1-udeb libuuid1-udeb zlib1g-udeb wget-udeb
-d-i partman/early_command string [[ -n "\$(blkid -t TYPE='vfat' -o device)" ]] && umount "\$(blkid -t TYPE='vfat' -o device)"; \
-debconf-set partman-auto/disk "\$(list-devices disk |head -n1)"; \
+#d-i partman/early_command string [[ -n "\$(blkid -t TYPE='vfat' -o device)" ]] && umount "\$(blkid -t TYPE='vfat' -o device)"; \
+#debconf-set partman-auto/disk "\$(list-devices disk |head -n1)"; \
 wget -qO- '$DDURL' |gunzip -dc |/bin/dd of=\$(list-devices disk |head -n1); \
 mount.ntfs-3g \$(list-devices partition |head -n1) /mnt; \
 cd '/mnt/ProgramData/Microsoft/Windows/Start Menu/Programs'; \
@@ -665,18 +665,18 @@ cp -f '/net.bat' './net.bat'; \
 /sbin/reboot; \
 umount /media || true; \
 
-d-i partman-partitioning/confirm_write_new_label boolean true
-d-i partman/mount_style select uuid
-d-i partman/choose_partition select finish
-d-i partman-auto/method string regular
-d-i partman-auto/init_automatically_partition select Guided - use entire disk
-d-i partman-auto/choose_recipe select All files in one partition (recommended for new users)
-d-i partman-md/device_remove_md boolean true
-d-i partman-lvm/device_remove_lvm boolean true
-d-i partman-lvm/confirm boolean true
-d-i partman-lvm/confirm_nooverwrite boolean true
-d-i partman/confirm boolean true
-d-i partman/confirm_nooverwrite boolean true
+#d-i partman-partitioning/confirm_write_new_label boolean true
+#d-i partman/mount_style select uuid
+#d-i partman/choose_partition select finish
+#d-i partman-auto/method string regular
+#d-i partman-auto/init_automatically_partition select Guided - use entire disk
+#d-i partman-auto/choose_recipe select All files in one partition (recommended for new users)
+#d-i partman-md/device_remove_md boolean true
+#d-i partman-lvm/device_remove_lvm boolean true
+#d-i partman-lvm/confirm boolean true
+#d-i partman-lvm/confirm_nooverwrite boolean true
+#d-i partman/confirm boolean true
+#d-i partman/confirm_nooverwrite boolean true
 
 d-i debian-installer/allow_unauthenticated boolean true
 
@@ -688,9 +688,9 @@ d-i apt-setup/services-select multiselect
 
 popularity-contest popularity-contest/participate boolean false
 
-d-i grub-installer/only_debian boolean true
-d-i grub-installer/bootdev string $IncDisk
-d-i grub-installer/force-efi-extra-removable boolean true
+#d-i grub-installer/only_debian boolean true
+#d-i grub-installer/bootdev string $IncDisk
+#d-i grub-installer/force-efi-extra-removable boolean true
 d-i finish-install/reboot_in_progress note
 d-i debian-installer/exit/reboot boolean true
 d-i preseed/late_command string	\
